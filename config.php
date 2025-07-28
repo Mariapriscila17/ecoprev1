@@ -1,6 +1,6 @@
 <?php
 class BancoDeDados {
-    private $host = "127.0.0.1";
+    private $host = "localhost:49160";
     private $nome_banco = "cadastro";
     private $usuario = "root";
     private $senha = "";
