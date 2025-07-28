@@ -29,7 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     if (empty($erros)) {
         try {
-            $pdo = conectarBanco();
+            $banco = new BancoDeDados();
+            $pdo = $banco->obterConexao();
+            
             
             // Verificar se matrícula ou email já existem
             $stmt = $pdo->prepare("SELECT COUNT(*) FROM usuarios WHERE matricula = ? OR email = ?");
@@ -136,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <button type="submit" class="btn btn-login">Cadastrar</button>
                 
                 <div class="back-link">
-                    <a href="index.html">← Voltar ao Login</a>
+                    <a href="index.php">← Voltar ao Login</a>
                 </div>
             </form>
         </div>
