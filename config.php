@@ -1,4 +1,6 @@
 <?php
+require_once 'config.php';
+
 class BancoDeDados {
     private $host = "localhost:49160";
     private $nome_banco = "cadastro";
@@ -25,4 +27,3 @@ class BancoDeDados {
 function hashSenha($senha) {
     return password_hash($senha, PASSWORD_DEFAULT);
 }
-?>
