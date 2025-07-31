@@ -22,54 +22,7 @@ $conn->close();
   <meta charset="UTF-8" />
   <title>EcoPrev - Dashboard</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background-color: #f4f6f8;
-    }
-    h1 {
-      color: #0a9396;
-      text-align: center;
-    }
-    .stats {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-    .stat-card {
-      background-color: white;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 15px 20px;
-      width: 200px;
-      text-align: center;
-      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-    }
-    .chart-container {
-      margin: 30px auto;
-      max-width: 600px;
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 1px 1px 6px rgba(0,0,0,0.1);
-    }
-    .recent-records {
-      max-width: 600px;
-      margin: 20px auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-    }
-    .record-item {
-      padding: 8px 0;
-      border-bottom: 1px solid #ddd;
-      display: flex;
-      justify-content: space-between;
-    }
-  </style>
+  
 </head>
 <body>
   <h1>EcoPrev - Dashboard</h1>
