@@ -1,14 +1,32 @@
 <?php
-// Aqui você pode colocar a lógica PHP para processar o formulário
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Coletando os dados do formulário
     $setor = $_POST['setor'] ?? '';
     $area = $_POST['area'] ?? '';
     $tipo = $_POST['tipo'] ?? '';
-    $quantidade = $_POST['quantidade'] ?? '';
-
-    // Exemplo de validação simples
-    if ($setor && $area && $tipo && $quantidade >= 0) {
-        echo "<script>alert('Registro salvo com sucesso!');</script>";
+    $quantidade = $_POST['quantidade'] ?? 0;
+ 
+    // Verifica se todos os campos estão preenchidos
+    if ($setor && $area && $tipo && is_numeric($quantidade) && $quantidade >= 0) {
+        // Conexão com o banco
+        $conn = new mysqli("localhost", "root", "", "cadastro",49170);
+ 
+        if ($conn->connect_error) {
+            die("Erro de conexão: " . $conn->connect_error);
+        }
+ 
+        // Prepara e executa o INSERT
+        $stmt = $conn->prepare("INSERT INTO registro (setor, area, tipo, quantidade, data_registro) VALUES (?, ?, ?, ?, NOW())");
+        $stmt->bind_param("sssd", $setor, $area, $tipo, $quantidade);
+ 
+        if ($stmt->execute()) {
+            echo "<script>alert('Registro salvo com sucesso!');</script>";
+        } else {
+            echo "<script>alert('Erro ao salvar o registro.');</script>";
+        }
+ 
+        $stmt->close();
+        $conn->close();
     } else {
         echo "<script>alert('Preencha todos os campos corretamente.');</script>";
     }
@@ -151,8 +169,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <header class="container">
     <h1>EcoPrev</h1>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="dashboard.html">Dashboard</a>
+      <a href="cadastro.php">Home</a>
+      <a href="dashboard.php">Dashboard</a>
     </nav>
   </header>
 
@@ -171,6 +189,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <label for="area">Área:</label>
         <select id="area" name="area" required>
           <option value="">Selecione uma área</option>
+          <option value="Orgânico">Orgânico</option>
         </select>
 
         <label for="tipo">Tipo de Resíduo:</label>

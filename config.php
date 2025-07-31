@@ -1,29 +1,24 @@
-<?php
-require_once 'config.php';
-
+<?php 
 class BancoDeDados {
-    private $host = "localhost:49160";
+    private $host = "localhost";
+    private $porta = "49170"; // Porta correta do MySQL
     private $nome_banco = "cadastro";
     private $usuario = "root";
     private $senha = "";
     public $conexao;
 
     public function obterConexao() {
+        $this->conexao = null;
         try {
-            $this->conexao = new PDO(
-                "mysql:host={$this->host};dbname={$this->nome_banco};charset=utf8",
-                $this->usuario,
-                $this->senha
-            );
+            $dsn = "mysql:host={$this->host};port={$this->porta};dbname={$this->nome_banco};charset=utf8";
+            $this->conexao = new PDO($dsn, $this->usuario, $this->senha);
             $this->conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $this->conexao;
-        } catch (PDOException $e) {
-            echo "Erro na conexão com o banco: " . $e->getMessage();
+        } catch (PDOException $excecao) {
+            echo "Erro de conexão: " . $excecao->getMessage();
             return null;
         }
+
+        return $this->conexao;
     }
 }
-
-function hashSenha($senha) {
-    return password_hash($senha, PASSWORD_DEFAULT);
-}
+?>
