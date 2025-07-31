@@ -26,6 +26,7 @@ $conn->close();
 </head>
 <body>
   <h1>EcoPrev - Dashboard</h1>
+  <link rel="stylesheet" href="style.css">
 
   <div class="stats">
     <div class="stat-card">
